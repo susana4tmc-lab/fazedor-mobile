@@ -589,7 +589,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const box=document.createElement('div'); box.id='mobileTabs';
   box.innerHTML = '<button data-tab="assertivas">🧩 Aprende frases assertivas</button>\n'+
                   '<button data-tab="classificar">🧠 Identifica as frases de pressão</button>';
-  document.body.prepend(box); document.body.prepend(btn);
+  document.querySelector('header .container').appendChild(box); document.querySelector('header .container').appendChild(btn);
 
   btn.onclick=()=>{ box.style.display = (box.style.display==='block'?'none':'block'); };
 
