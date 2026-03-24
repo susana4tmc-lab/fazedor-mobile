@@ -620,5 +620,29 @@ document.addEventListener('DOMContentLoaded',()=>{
 </script>
 
 <script>(function(){function e(){if(!window.matchMedia('(max-width:700px)').matches)return;if(document.getElementById('fabEmos'))return;const e=document.createElement('button');e.id='fabEmos',e.className='legend-fab',e.textContent='😊 Emoções';const t=document.createElement('div');t.id='sheetEmos',t.className='legend-sheet';const n=document.getElementById('legend');t.innerHTML='<h4>Legenda de Emoções</h4>'+(n?n.outerHTML:'<div>Sem legenda</div>');const o=document.createElement('button');o.id='fabTipos',o.className='legend-fab',o.textContent='📘 Legenda';const d=document.createElement('div');d.id='sheetTipos',d.className='legend-sheet',d.innerHTML='<h4>Legenda da Atividade</h4>'+'<div class="legend-row"><span class="legend-icon">✅</span> Frases respeitadoras</div>'+'<div class="legend-row"><span class="legend-icon">⚠️</span> Frases duvidosas</div>'+'<div class="legend-row"><span class="legend-icon">🚩</span> Frases de pressão</div>',document.body.appendChild(e),document.body.appendChild(t),document.body.appendChild(o),document.body.appendChild(d),e.onclick=()=>{t.style.display='block'===t.style.display?'none':'block',d.style.display='none'},o.onclick=()=>{d.style.display='block'===d.style.display?'none':'block',t.style.display='none'};function a(){const n=document.body.classList.contains('mode-assertivas');e.style.display=n?'inline-block':'none',t.style.display=n?t.style.display:'none',o.style.display=n?'none':'inline-block',d.style.display=n?'none':d.style.display}const s=window.selectTab;window.selectTab=function(e){if('function'==typeof s)s(e);else{const t='assertivas'===e;document.body.classList.toggle('mode-assertivas',t),document.body.classList.toggle('mode-classificar',!t)}a()},a(),document.addEventListener('click',(n=>{const s=n.target;s&&(t.contains(s)||s===e||(t.style.display='none'),d.contains(s)||s===o||(d.style.display='none'))}),!0)}'loading'===document.readyState?document.addEventListener('DOMContentLoaded',e):e();})();</script>
+
+<button id='verifyAlways' style='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:9999;background:#22c55e;color:#fff;padding:14px 20px;border:none;border-radius:12px;font-size:18px;box-shadow:0 4px 12px rgba(0,0,0,0.2);display:none;'>✅ Verificar</button>
+<script>
+function updateVerifyVisibility(){
+  const btn = document.getElementById('verifyAlways');
+  if(!btn) return;
+  const modeClass = document.body.classList.contains('mode-classificar');
+  btn.style.display = modeClass ? 'block' : 'none';
+}
+
+// Override tab switching if exists
+if(window.selectTab){
+  const oldSel = window.selectTab;
+  window.selectTab = function(m){ oldSel(m); updateVerifyVisibility(); };
+}
+
+document.addEventListener('DOMContentLoaded',updateVerifyVisibility);
+
+document.getElementById('verifyAlways').onclick = function(){
+  const b = document.getElementById('verificar');
+  if(b) b.click();
+};
+</script>
+
 </body>
 </html>
