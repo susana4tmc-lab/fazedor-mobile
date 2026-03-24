@@ -126,6 +126,24 @@ body.mode-classificar #sec-frases + .hiddenNote{display:block}
 
 </style>
 
+/* --- CORREÇÃO MOBILE PARA MOSTRAR BOTÕES DO EXERCÍCIO --- */
+@media(max-width: 900px){
+  .toolbar2 {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+  #controlsClassificar .toolbar2 {
+    display: flex !important;
+  }
+}
+
+/* NÃO esconder secções no mobile */
+.grid.focus-frases > section:nth-child(2),
+.grid.focus-ex > section:first-child {
+  display: block !important;
+}
+
 <style>
 
 /* === OVERRIDES: Cabeçalho compacto (injetado por Piloto, 2026-03-23) === */
