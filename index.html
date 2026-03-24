@@ -129,6 +129,26 @@ body.mode-classificar #sec-frases + .hiddenNote{display:block}
 </style>
 
 <style>
+/* --- CORREÇÃO MOBILE PARA MOSTRAR BOTÕES NO EXERCÍCIO --- */
+@media(max-width: 900px){
+  .toolbar2 {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+  #controlsClassificar .toolbar2 {
+    display: flex !important;
+  }
+}
+
+/* Impedir que o mobile esconda a parte do exercício */
+.grid.focus-frases > section:nth-child(2),
+.grid.focus-ex > section:first-child {
+  display: block !important;
+}
+</style>
+
+<style>
 
 /* === OVERRIDES: Cabeçalho compacto (injetado por Piloto, 2026-03-23) === */
 header { padding: 4px 0 !important; }
@@ -231,28 +251,6 @@ document.addEventListener('DOMContentLoaded',()=>{
   .legend-row{display:flex;gap:8px;align-items:center;margin:6px 0}
   .legend-icon{width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid #e5e7eb;background:#f9fafb}
 }
-
-
-style>
-/* --- CORREÇÃO MOBILE PARA MOSTRAR BOTÕES NO MOBILE --- */
-@media(max-width: 900px){
-  .toolbar2 {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-  }
-  #controlsClassificar .toolbar2 {
-    display: flex !important;
-  }
-}
-
-/* NÃO esconder secções no mobile */
-.grid.focus-frases > section:nth-child(2),
-.grid.focus-ex > section:first-child {
-  display: block !important;
-}
-</style>
-
 </head>
 <body>
 <header role="banner">
