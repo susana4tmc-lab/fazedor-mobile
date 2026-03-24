@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>O Fazedor e a Ampulheta — Versão Mobile 2.1</title>
+
+<!-- =======================================================
+     BLOCO 1 — CSS BASE + CABEÇALHO COMPLETO (VERSÃO A)
+     ======================================================= -->
+
+<style>
+:root {
+  --fundo: #faf7f0;
+  --texto: #1f1f1f;
+  --muted: #4b4b4b;
+
+  --branco: #ffffff;
+  --cinza: #e5e5e5;
+  --cinza2: #dcdcdc;
+  --cinza-escuro: #b6b6b6;
+
+  --card: #ffffff;
+  --sombra: rgba(0,0,0,0.1);
+
+  /* cores pedagógicas */
+  --ok: #3cb371;
+  --warn: #e6b23a;
+  --bad: #e05a5a;
+
+  --azul-tab: #d9e8ff;
+}
+
+/* ===== RESET MOBILE ===== */
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== CABEÇALHO COMPLETO (VERSÃO A) ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #fff;
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--cinza);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* linha 1: título + ícone */
+header .titulo-linha {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header .titulo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+header .subtitulo {
+  font-size: .80rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* ampulheta */
+header .icon {
+  width: 40px;
+  height: 40px;
+}
+
+/* passos da atividade */
+.passos {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: .70rem;
+}
+
+.passos span {
+  background: var(--cinza);
+  padding: 3px 8px;
+  border-radius: 8px;
+}
+
+/* seletor de categoria */
+header .filtros {
+  margin-top: 10px;
+}
+
+header select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid var(--cinza-escuro);
+  background: #fff;
+  font-size: .95rem;
+}
+
+/* tabs: Aprende / Identifica */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.tab {
+  flex: 1;
+  background: var(--cinza);
+  padding: 10px 0;
+  border-radius: 12px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: var(--azul-tab);
+  font-weight: 700;
+}
+
+/* ========= LEGENDA DAS EMOÇÕES (no cabeçalho) ========= */
+.legenda-emocoes {
+  margin-top: 12px;
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  padding-bottom: 4px;
+}
+
+.legenda-emocoes .chip {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: .75rem;
+  background: #fff;
+  border: 1px solid var(--cinza2);
+  padding: 5px 8px;
+  border-radius: 12px;
+}
+
+/* ====== CONTEÚDO ====== */
+main {
+  padding: 16px;
+}
+
+/* cartão base */
+.card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px var(--sombra);
+}
+
+/* barra de emoções por frase */
+.emoBar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 8px 0;
+}
+
+.emo {
+  font-size: 24px;
+  background: var(--branco);
+  border: 1px solid var(--cinza-escuro);
+  padding: 6px 10px;
+  border-radius: 10px;
+  flex: 0 0 auto;
+}
+
+/* animação do alívio 😌 */
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+/* navegação */
+.navBtns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.navBtns button {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--cinza);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.navBtns button:disabled {
+  opacity: .4;
+}
+
+/* exercício Identifica (BLOCO 4 mantém-se) */
+.dropzone {
+  border: 2px dashed var(--cinza-escuro);
+  border-radius: 14px;
+  padding: 16px;
+  min-height: 130px;
+  background: #fff;
+  margin-bottom: 16px;
+}
+
+.draggable {
+  background: #fff;
+  border: 1px solid var(--cinza);
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- =======================================================
+     CABEÇALHO COMPLETO (VERSÃO A RESTAURADA)
+     ======================================================= -->
+
+<header>
+
+  <div class="titulo-linha">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Hourglass_icon.png"
+         class="icon" alt="">
+    <div>
+      <div class="titulo">
+        O Fazedor e a Ampulheta — Explorar Emoções & Assertividade
+      </div>
+      <div class="subtitulo">
+        Atividade de sala: ver, sentir, responder
+      </div>
+    </div>
+  </div>
+
+  <div class="passos">
+    <span>1. Escolhe a categoria</span>
+    <span>2. Lê a pressão</span>
+    <span>3. Marca emoções</span>
+    <span>4. Escolhe a resposta</span>
+    <span>5. Partilha/exporta</span>
+  </div>
+
+  <div class="filtros">
+    <select id="categoria">
+      <option value="">Todas as categorias</option>
+      <option>Insistência</option>
+      <option>Uso indevido da amizade</option>
+      <option>Pressão para comportamentos de risco</option>
+      <option>Culpa / vergonha</option>
+      <option>Pressão do grupo</option>
+      <option>Comparação</option>
+      <option>Questionar sentimentos</option>
+      <option>Ataque pessoal</option>
+    </select>
+  </div>
+
+  <div class="legenda-emocoes">
+    <div class="chip">😊 Tranquilo/a</div>
+    <div class="chip">😟 Triste</div>
+    <div class="chip">😡 Zangado/a</div>
+    <div class="chip">😨 Medo</div>
+    <div class="chip">😕 Confuso/a</div>
+    <div class="chip">😳 Envergonhado/a</div>
+    <div class="chip">😬 Ansioso/a</div>
+    <div class="chip">😌 Alívio</div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="mudarTab('aprende')">🧩 Aprende</div>
+    <div class="tab" onclick="mudarTab('identifica')">🧠 Identifica</div>
+  </div>
+
+</header>
+
+<!-- Início do conteúdo -->
+<main>
+  <section id="modo-aprende"></section>
+  <section id="modo-identifica" style="display:none;"></section>
+<!-- =======================================================
+     BLOCO 2 — DADOS COMPLETOS
+     Frases, categorias, respostas assertivas, emoções
+     ======================================================= -->
+
+<script>
+//
+// ===== Lista completa de frases reais + respostas ideais =====
+// (Versão fiel ao teu projeto original)
+//
+
+window.FRASES = [
+  { txt: "Anda lá…", categoria: "Insistência",
+    respostas: ["Prefiro não fazer, a minha resposta é não."] },
+
+  { txt: "Só mais uma vez.", categoria: "Insistência",
+    respostas: ["Mesmo assim, não quero repetir."] },
+
+  { txt: "Não custa nada.", categoria: "Insistência",
+    respostas: ["Para mim custa, e isso importa. Prefiro não fazer"] },
+
+  { txt: "É só um bocadinho.", categoria: "Insistência",
+    respostas: ["Eu decido o que quero fazer, e agora não quero."] },
+
+  { txt: "Duvido que consigas — prova!", categoria: "Insistência",
+    respostas: ["Não preciso de provar nada. Não vou fazer."] },
+
+  { txt: "Não sejas chato.", categoria: "Ataque pessoal",
+    respostas: ["Estou só a dizer o que preciso. Não é ser chato"] },
+
+  { txt: "Assim magoas-me.", categoria: "Uso indevido da amizade",
+    respostas: ["Não quero magoar-te, mas a minha resposta não muda."] },
+
+  { txt: "Depois de tudo o que fiz…", categoria: "Uso indevido da amizade",
+    respostas: ["Agradeço, mas mesmo assim prefiro não fazer."] },
+
+  { txt: "Se disseres que não, é porque não te importas comigo.",
+    categoria: "Uso indevido da amizade",
+    respostas: ["Importo-me, mas também tenho limites. E digo não."] },
+
+  { txt: "Faz isso por mim...", categoria: "Uso indevido da amizade",
+    respostas: ["Gosto de ti, mas mesmo assim digo não."] },
+
+  { txt: "Um amigo verdadeiro não me deixava sozinho nesta.",
+    categoria: "Uso indevido da amizade",
+    respostas: ["Posso ser teu amigo, mas tenho de respeitar os meus limites."] },
+
+  { txt: "És um mau amigo se me deixares pendurado.",
+    categoria: "Uso indevido da amizade",
+    respostas: ["Ser amigo não é fazer tudo. E eu não quero fazer isto."] },
+
+  { txt: "Toda a gente faz isso.", categoria: "Pressão do grupo",
+    respostas: ["Eu posso escolher diferente dos outros."] },
+
+  { txt: "És o único que não quer.", categoria: "Pressão do grupo",
+    respostas: [
+      "Está tudo bem ser diferente. Eu não quero.",
+      "Prefiro ser eu próprio do que fazer algo só para encaixar"
+    ] },
+
+  { txt: "Ninguém diz que não.", categoria: "Pressão do grupo",
+    respostas: ["Eu digo não, e isso conta."] },
+
+  { txt: "Vais ser o único diferente.", categoria: "Pressão do grupo",
+    respostas: ["Ser diferente não tem mal. A minha decisão é não."] },
+
+  { txt: "Se não fizeres, não andas connosco.", categoria: "Pressão do grupo",
+    respostas: ["Um amigo aceita o outro mesmo quando ele diz não."] },
+
+  { txt: "Se não fizeres, estragas a brincadeira.",
+    categoria: "Pressão do grupo",
+    respostas: ["Podemos brincar sem isso. Eu não quero participar nisso."] },
+
+  { txt: "Se todos fizermos, tu também tens de fazer.",
+    categoria: "Pressão do grupo",
+    respostas: ["Eu escolho por mim. E escolho não fazer."] },
+
+  { txt: "Fazes parte do grupo ou não?",
+    categoria: "Pressão do grupo",
+    respostas: ["Faço parte, mas não tenho de fazer tudo. Isto eu não quero fazer."] },
+
+  { txt: "Os outros não têm medo — só tu.",
+    categoria: "Comparação",
+    respostas: ["O meu medo é importante. E eu escolho não fazer."] },
+
+  { txt: "O teu amigo aceitou.",
+    categoria: "Comparação",
+    respostas: ["Eu não sou o meu amigo. Eu decido por mim."] },
+
+  { txt: "Até os mais novos aceitam… e tu não?",
+    categoria: "Comparação",
+    respostas: ["Cada pessoa decide por si. Eu decido não fazer."] },
+
+  { txt: "Estás a exagerar.", categoria: "Questionar sentimentos",
+    respostas: ["O que eu sinto é importante. E a minha resposta é não."] },
+
+  { txt: "Não é assim tão grave.", categoria: "Questionar sentimentos",
+    respostas: ["Para mim é importante. Por isso digo não."] },
+
+  { txt: "Estás confuso.", categoria: "Questionar sentimentos",
+    respostas: ["Eu sei o que sinto e sei o que quero."] },
+
+  { txt: "Estás a inventar.", categoria: "Questionar sentimentos",
+    respostas: ["O que estou a dizer é verdade para mim."] },
+
+  { txt: "Isso é parvo.", categoria: "Ataque pessoal",
+    respostas: ["Não gostei do que disseste. Fala comigo com respeito."] },
+
+  { txt: "És mesmo difícil.", categoria: "Ataque pessoal",
+    respostas: ["Por favor, sem ofensas. A minha resposta é não."] },
+
+  { txt: "És muito sensível.", categoria: "Ataque pessoal",
+    respostas: ["O que eu sinto é válido. Continuo a não querer."] },
+
+  { txt: "Nunca queres nada.", categoria: "Culpa / vergonha",
+    respostas: ["Agora não quero isto. E isso está certo para mim."] },
+
+  { txt: "Só sabes reclamar.", categoria: "Culpa / vergonha",
+    respostas: [
+      "Não estou a reclamar. Só estou a tentar contar-te o que me está a custar."
+    ] },
+
+  { txt: "É só por diversão, ninguém vai saber.",
+    categoria: "Pressão para comportamentos de risco",
+    respostas: ["Mesmo assim, eu não quero. Para mim não está bem."] },
+
+  { txt: "Vamos filmar, vai ser épico.",
+    categoria: "Pressão para comportamentos de risco",
+    respostas: ["Não quero ser filmado nem fazer isso. Prefiro não participar."] },
+
+  { txt: "Uma vez não faz mal.",
+    categoria: "Pressão para comportamentos de risco",
+    respostas: ["Eu decido o que é seguro para mim. E escolho não fazer."] },
+
+  { txt: "Já fizemos mil vezes e nunca aconteceu nada",
+    categoria: "Pressão para comportamentos de risco",
+    respostas: ["Mesmo assim, eu prefiro não arriscar."] }
+];
+
+
+//
+// ===== Lista das emoções (inclui Alívio bloqueado) =====
+//
+
+window.EMOCOES = [
+  { emoji: "😊", nome: "Tranquilo/a" },
+  { emoji: "😟", nome: "Triste" },
+  { emoji: "😡", nome: "Zangado/a" },
+  { emoji: "😨", nome: "Com medo" },
+  { emoji: "😕", nome: "Confuso/a" },
+  { emoji: "😳", nome: "Envergonhado/a" },
+  { emoji: "😬", nome: "Ansioso/a" },
+  { emoji: "😌", nome: "Alívio", gated: true }
+];
+</script>
+<!-- ============================================
+     BLOCO 3 — MODO "APRENDE" (REVISTO)
+     Funcionalidades:
+     ✔ filtragem por categoria (de pressão)
+     ✔ smile de alívio com animação
+     ✔ feedback pedagógico
+     ✔ navegação frase a frase
+     ✔ emoções resetáveis
+     ✔ respostas por categoria
+     ============================================ -->
+
+<script id="logicaAprende">
+
+/* ----------------------------------------------
+   1. ESTADO GLOBAL
+   ---------------------------------------------- */
+
+let indiceAtual = 0;
+let progresso = {};
+let filtroAtivo = "todas"; // categoria de pressão selecionada
+
+
+/* ----------------------------------------------
+   2. OBTÉM A LISTA FILTRADA
+   ---------------------------------------------- */
+
+function frasesFiltradas() {
+  if (filtroAtivo === "todas") return window.FRASES;
+
+  return window.FRASES.filter(f => f.categoria === filtroAtivo);
+}
+
+
+/* ----------------------------------------------
+   3. RENDER DO FILTRO DE CATEGORIA
+   (usa as categorias já existentes no BLOCO 2)
+   ---------------------------------------------- */
+
+function renderFiltro(container) {
+
+  const cats = ["todas", ...new Set(window.FRASES.map(f => f.categoria))];
+
+  const wrap = document.createElement("div");
+  wrap.style.display = "flex";
+  wrap.style.gap = "6px";
+  wrap.style.marginBottom = "10px";
+
+  cats.forEach(cat => {
+    const b = document.createElement("button");
+    b.textContent = cat.toUpperCase();
+    b.style.padding = "6px 10px";
+    b.style.border = "none";
+    b.style.borderRadius = "6px";
+    b.style.cursor = "pointer";
+
+    if (filtroAtivo === cat) {
+      b.style.background = "var(--ok)";
+      b.style.color = "#fff";
+    } else {
+      b.style.background = "var(--cinza)";
+    }
+
+    b.onclick = () => {
+      filtroAtivo = cat;
+      indiceAtual = 0;
+      renderFrase();
+    };
+
+    wrap.appendChild(b);
+  });
+
+  container.appendChild(wrap);
+}
+
+
+/* ----------------------------------------------
+   4. ANIMAÇÃO DO SMILE DE ALÍVIO
+   ---------------------------------------------- */
+
+function animarAlivio(btn) {
+  btn.animate(
+    [
+      { transform: "scale(1)" },
+      { transform: "scale(1.25)" },
+      { transform: "scale(1)" }
+    ],
+    {
+      duration: 500,
+      easing: "ease-out"
+    }
+  );
+}
+
+
+/* ----------------------------------------------
+   5. RENDER DA FRASE
+   ---------------------------------------------- */
+
+function renderFrase() {
+
+  const lista = frasesFiltradas();
+  const dados = lista[indiceAtual];
+
+  const container = document.getElementById("modo-aprende");
+  container.innerHTML = "";
+
+  /* -------- Filtro ---------- */
+  renderFiltro(container);
+
+  /* -------- Card principal ---------- */
+
+  const card = document.createElement("div");
+  card.className = "card";
+
+  const title = document.createElement("h3");
+  title.textContent = dados.txt;
+
+  const cat = document.createElement("div");
+  cat.style.fontSize = "0.9rem";
+  cat.style.color = "#666";
+  cat.textContent = "Categoria: " + dados.categoria;
+
+  /* -------- Barra de emoções ---------- */
+
+  const emoBar = document.createElement("div");
+  emoBar.className = "emoBar";
+
+  window.EMOCOES.forEach(e => {
+
+    const b = document.createElement("div");
+    b.className = "emo";
+    b.textContent = e.emoji;
+
+    // bloqueio do alívio
+    if (e.gated && !progresso[dados.txt]?.respostaSelecionada) {
+      b.style.opacity = "0.4";
+      b.style.pointerEvents = "none";
+    }
+
+    // manter selecionadas
+    if (progresso[dados.txt]?.emo?.includes(e.emoji)) {
+      b.style.border = "2px solid var(--ok)";
+    }
+
+    b.onclick = () => {
+      if (!progresso[dados.txt]) progresso[dados.txt] = {};
+      const arr = progresso[dados.txt].emo ?? [];
+
+      if (arr.includes(e.emoji)) {
+        progresso[dados.txt].emo = arr.filter(x => x !== e.emoji);
+        b.style.border = "1px solid var(--cinza-escuro)";
+      } else {
+        progresso[dados.txt].emo = [...arr, e.emoji];
+        b.style.border = "2px solid var(--ok)";
+
+        // animação no alívio
+        if (e.gated) animarAlivio(b);
+      }
+    };
+
+    emoBar.appendChild(b);
+  });
+
+  /* -------- Botão limpar emoções ---------- */
+
+  const btnLimpar = document.createElement("button");
+  btnLimpar.textContent = "🧹 Limpar emoções";
+  btnLimpar.style.marginTop = "6px";
+  btnLimpar.onclick = () => {
+    if (progresso[dados.txt]) delete progresso[dados.txt].emo;
+    renderFrase();
+  };
+
+
+  /* -------- Select de respostas por categoria ---------- */
+
+  const sel = document.createElement("select");
+
+  const opt0 = document.createElement("option");
+  opt0.value = "";
+  opt0.textContent = "— escolher resposta —";
+  sel.appendChild(opt0);
+
+  // usa AS TUAS respostas existentes da categoria da frase:
+  dados.respostas.forEach(r => {
+    const o = document.createElement("option");
+    o.value = o.textContent = r;
+    sel.appendChild(o);
+  });
+
+  if (progresso[dados.txt]?.respostaSelecionada) {
+    sel.value = progresso[dados.txt].respostaSelecionada;
+  }
+
+  /* -------- Feedback pedagógico ---------- */
+
+  const feedback = document.createElement("div");
+  feedback.style.marginTop = "12px";
+
+  sel.onchange = () => {
+    const val = sel.value;
+
+    if (!progresso[dados.txt]) progresso[dados.txt] = {};
+    progresso[dados.txt].respostaSelecionada = val;
+
+    feedback.innerHTML =
+      "✔️ Excelente escolha!<br>Esta resposta ajuda-te a reconhecer a pressão, a proteger os teus limites e a comunicar com clareza.";
+
+    renderFrase(); // re-render ativa o alívio
+  };
+
+  /* -------- Navegação ---------- */
+
+  const nav = document.createElement("div");
+  nav.className = "navBtns";
+
+  const btnPrev = document.createElement("button");
+  btnPrev.textContent = "⬅️ Anterior";
+  btnPrev.disabled = indiceAtual === 0;
+  btnPrev.onclick = () => {
+    if (indiceAtual > 0) {
+      indiceAtual--;
+      renderFrase();
+    }
+  };
+
+  const btnNext = document.createElement("button");
+  btnNext.textContent = "Próxima ➡️";
+  btnNext.disabled = !progresso[dados.txt]?.respostaSelecionada;
+  btnNext.onclick = () => {
+    if (indiceAtual < lista.length - 1) {
+      indiceAtual++;
+      renderFrase();
+    }
+  };
+
+  nav.appendChild(btnPrev);
+  nav.appendChild(btnNext);
+
+
+  /* -------- Progresso ---------- */
+
+  const prog = document.createElement("div");
+  prog.style.fontSize = "0.85rem";
+  prog.style.color = "#666";
+  prog.style.marginTop = "10px";
+  prog.textContent = `Frase ${indiceAtual + 1} de ${lista.length}`;
+
+
+  /* -------- Montagem ---------- */
+  card.appendChild(title);
+  card.appendChild(cat);
+  card.appendChild(emoBar);
+  card.appendChild(btnLimpar);
+  card.appendChild(sel);
+  card.appendChild(feedback);
+  card.appendChild(nav);
+  card.appendChild(prog);
+
+  container.appendChild(card);
+}
+
+
+/* ----------------------------------------------
+   6. INICIALIZAÇÃO
+   ---------------------------------------------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderFrase();
+});
+
+</script>
+<!-- ============================================
+     BLOCO 4 — EXERCÍCIO "IDENTIFICA"
+     Drag & Drop · Botões acessíveis · Verificação
+     ============================================ -->
+
+<script id="logicaIdentifica">
+
+/* ----------------------------------------------
+   1. CATEGORIZAÇÃO SIMPLIFICADA
+   ---------------------------------------------- */
+
+const CATEGORIAS_IDENTIFICA = {
+  "respeito": "Frases respeitadoras",
+  "duvida": "Frases duvidosas",
+  "pressao": "Frases de pressão"
+};
+
+// Estas são frases de "respeito" verdadeiras:
+const RESPEITADORAS = [
+  "Queres provar um bocadinho?",
+  "Se não quiseres, não faz mal.",
+  "Podes escolher.",
+  "Está tudo bem se disseres que não.",
+  "Queres ir brincar ou preferes ficar aqui?",
+  "Diz se não te apetecer.",
+  "Só se quiseres.",
+  "Não faz mal nenhum se não quiseres.",
+  "Faz como tu achares melhor",
+  "Queres jogar comigo?"
+];
+
+// Estas são frases "duvidosas":
+const DUVIDOSAS = [
+  "Estou só a tentar ajudar…",
+  "É para teu bem.",
+  "Eu só quero ser simpático.",
+  "Não percebo porque não queres."
+];
+
+// Todas as outras frases do MAP são de pressão
+function tipoFrase(txt) {
+  if (RESPEITADORAS.includes(txt)) return "respeito";
+  if (DUVIDOSAS.includes(txt)) return "duvida";
+  return "pressao";
+}
+
+
+/* ----------------------------------------------
+   2. GERAR DECK PARA O EXERCÍCIO
+   ---------------------------------------------- */
+
+function gerarFrasesExercicio() {
+  const press = window.FRASES.map(f => f.txt);
+
+  const deck = [
+    ...RESPEITADORAS.map(t => ({ txt: t, tipo: "respeito" })),
+    ...DUVIDOSAS.map(t => ({ txt: t, tipo: "duvida" })),
+    ...press.map(t => ({ txt: t, tipo: "pressao" }))
+  ];
+
+  // Embaralhar
+  return deck.sort(() => Math.random() - 0.5);
+}
+
+
+/* ----------------------------------------------
+   3. RENDERIZAÇÃO DO EXERCÍCIO
+   ---------------------------------------------- */
+
+function renderIdentifica() {
+
+  const container = document.getElementById("modo-identifica");
+  container.innerHTML = "";
+
+  const card = document.createElement("div");
+  card.className = "card";
+
+  const titulo = document.createElement("h3");
+  titulo.textContent = "🧠 Exercício: identifica o tipo de frase";
+  card.appendChild(titulo);
+
+  // Explicação
+  const p = document.createElement("p");
+  p.textContent = "Arrasta cada frase para a categoria correta, ou usa os botões.";
+  p.style.fontSize = "0.9rem";
+  p.style.color = "#555";
+  card.appendChild(p);
+
+  // Área das 3 caixas
+  const zonas = document.createElement("div");
+  zonas.style.marginTop = "20px";
+
+  const zonaRes = criarDropzone("respeito");
+  const zonaDuv = criarDropzone("duvida");
+  const zonaPre = criarDropzone("pressao");
+
+  zonas.appendChild(zonaRes.container);
+  zonas.appendChild(zonaDuv.container);
+  zonas.appendChild(zonaPre.container);
+
+  // Lista de frases para arrastar
+  const listaFrases = gerarFrasesExercicio();
+
+  const pool = document.createElement("div");
+  pool.style.marginTop = "20px";
+
+  listaFrases.forEach(obj => {
+    pool.appendChild(criarDraggable(obj, zonaRes, zonaDuv, zonaPre));
+  });
+
+  // Botões de controlo
+  const controls = document.createElement("div");
+  controls.style.marginTop = "20px";
+  controls.style.display = "flex";
+  controls.style.flexDirection = "column";
+  controls.style.gap = "10px";
+
+  // Verificar
+  const btnVer = document.createElement("button");
+  btnVer.textContent = "✅ Verificar";
+  btnVer.style.padding = "12px";
+  btnVer.style.borderRadius = "10px";
+  btnVer.style.border = "none";
+  btnVer.style.background = "var(--ok)";
+  btnVer.style.color = "white";
+  btnVer.onclick = () => verificarExercicio(zonaRes, zonaDuv, zonaPre);
+
+  // Mostrar solução
+  const btnSol = document.createElement("button");
+  btnSol.textContent = "👀 Mostrar solução";
+  btnSol.style.padding = "12px";
+  btnSol.style.borderRadius = "10px";
+  btnSol.style.border = "none";
+  btnSol.style.background = "#888";
+  btnSol.style.color = "white";
+  btnSol.onclick = () => mostrarSolucao(zonaRes, zonaDuv, zonaPre, listaFrases);
+
+  // Refazer erradas
+  const btnRedo = document.createElement("button");
+  btnRedo.textContent = "↩️ Refazer só erradas";
+  btnRedo.style.padding = "12px";
+  btnRedo.style.borderRadius = "10px";
+  btnRedo.style.border = "none";
+  btnRedo.style.background = "#ffba4b";
+  btnRedo.style.color = "white";
+  btnRedo.onclick = () => refazerErradas(zonaRes, zonaDuv, zonaPre, pool);
+
+  controls.appendChild(btnVer);
+  controls.appendChild(btnSol);
+  controls.appendChild(btnRedo);
+
+  card.appendChild(zonas);
+  card.appendChild(pool);
+  card.appendChild(controls);
+
+  container.appendChild(card);
+}
+
+
+/* ----------------------------------------------
+   4. CRIAÇÃO DE DROPZONES
+   ---------------------------------------------- */
+
+function criarDropzone(tipo) {
+
+  const container = document.createElement("div");
+  container.className = "dropzone";
+
+  const titulo = document.createElement("h4");
+  titulo.textContent = CATEGORIAS_IDENTIFICA[tipo];
+  container.appendChild(titulo);
+
+  const holder = document.createElement("div");
+  holder.className = "holder";
+  holder.style.display = "flex";
+  holder.style.flexDirection = "column";
+  holder.style.gap = "8px";
+  holder.style.marginTop = "10px";
+  container.appendChild(holder);
+
+  // Permitir largar
+  container.ondragover = e => e.preventDefault();
+
+  container.ondrop = e => {
+    const txt = e.dataTransfer.getData("text");
+    moverCardPara(tipo, txt, holder);
+  };
+
+  return { container, holder };
+}
+
+
+/* ----------------------------------------------
+   5. CRIAR DRAGGABLE + BOTÕES ALTERNATIVOS
+   ---------------------------------------------- */
+
+function criarDraggable(obj, zonaRes, zonaDuv, zonaPre) {
+
+  const d = document.createElement("div");
+  d.className = "draggable";
+  d.draggable = true;
+  d.textContent = obj.txt;
+
+  d.ondragstart = e => {
+    e.dataTransfer.setData("text", obj.txt);
+  };
+
+  // Botões alternativos
+  const btns = document.createElement("div");
+  btns.style.display = "flex";
+  btns.style.gap = "6px";
+  btns.style.marginTop = "6px";
+
+  const b1 = document.createElement("button");
+  b1.textContent = "➡️ Respeito";
+  b1.onclick = () => moverCardPara("respeito", obj.txt, zonaRes.holder);
+
+  const b2 = document.createElement("button");
+  b2.textContent = "➡️ Duvidosa";
+  b2.onclick = () => moverCardPara("duvida", obj.txt, zonaDuv.holder);
+
+  const b3 = document.createElement("button");
+  b3.textContent = "➡️ Pressão";
+  b3.onclick = () => moverCardPara("pressao", obj.txt, zonaPre.holder);
+
+  [b1, b2, b3].forEach(b => {
+    b.style.border = "none";
+    b.style.padding = "6px";
+    b.style.borderRadius = "8px";
+    b.style.background = "var(--cinza)";
+    b.style.cursor = "pointer";
+  });
+
+  btns.appendChild(b1);
+  btns.appendChild(b2);
+  btns.appendChild(b3);
+
+  d.appendChild(btns);
+
+  return d;
+}
+
+
+/* ----------------------------------------------
+   6. MOVER CARTÃO PARA UMA CAIXA
+   ---------------------------------------------- */
+
+function moverCardPara(tipo, txt, destino) {
+
+  // Remover qualquer cópia anterior
+  document.querySelectorAll(".draggable").forEach(el => {
+    if (el.childNodes[0].nodeValue === txt) el.remove();
+  });
+
+  // Criar novo card dentro da caixa
+  const novo = document.createElement("div");
+  novo.className = "draggable";
+  novo.textContent = txt;
+
+  destino.appendChild(novo);
+}
+
+
+/* ----------------------------------------------
+   7. VERIFICAÇÃO DO EXERCÍCIO
+   ---------------------------------------------- */
+
+function verificarExercicio(zRes, zDuv, zPre) {
+
+  let total = 0;
+  let corretos = 0;
+
+  // Função auxiliar
+  function verificaZona(holder, tipoCerto) {
+    const cards = holder.querySelectorAll(".draggable");
+    cards.forEach(c => {
+      total++;
+      const texto = c.textContent.trim();
+      const tipo = tipoFrase(texto);
+
+      if (tipo === tipoCerto) {
+        corretos++;
+        c.style.border = "2px solid var(--ok)";
+      } else {
+        c.style.border = "2px solid var(--bad)";
+      }
+    });
+  }
+
+  verificaZona(zRes.holder, "respeito");
+  verificaZona(zDuv.holder, "duvida");
+  verificaZona(zPre.holder, "pressao");
+
+  alert(`Acertaste ${corretos} em ${total}.`);
+}
+
+
+/* ----------------------------------------------
+   8. MOSTRAR SOLUÇÃO
+   ---------------------------------------------- */
+
+function mostrarSolucao(zRes, zDuv, zPre, lista) {
+
+  zRes.holder.innerHTML = "";
+  zDuv.holder.innerHTML = "";
+  zPre.holder.innerHTML = "";
+
+  lista.forEach(obj => {
+    const destino =
+      obj.tipo === "respeito" ? zRes.holder :
+      obj.tipo === "duvida"   ? zDuv.holder :
+                                zPre.holder;
+
+    const d = document.createElement("div");
+    d.className = "draggable";
+    d.textContent = obj.txt;
+    destino.appendChild(d);
+  });
+}
+
+
+/* ----------------------------------------------
+   9. REFAZER SÓ AS ERRADAS
+   ---------------------------------------------- */
+
+function refazerErradas(zRes, zDuv, zPre, pool) {
+
+  const recolher = [];
+
+  function recolhe(holder, tipo) {
+    const cards = holder.querySelectorAll(".draggable");
+    cards.forEach(c => {
+      const texto = c.textContent.trim();
+      const t = tipoFrase(texto);
+
+      if (t !== tipo) {
+        recolher.push({ txt: texto, tipo: t });
+        c.remove();
+      }
+    });
+  }
+
+  recolhe(zRes.holder, "respeito");
+  recolhe(zDuv.holder, "duvida");
+  recolhe(zPre.holder, "pressao");
+
+  // Devolver as erradas ao pool
+  recolher.forEach(obj => {
+    pool.appendChild(criarDraggable(obj, zRes, zDuv, zPre));
+  });
+}
+
+
+/* ----------------------------------------------
+   10. INICIALIZAR QUANDO A TAB "IDENTIFICA" É ABERTA
+   ---------------------------------------------- */
+
+document.querySelectorAll(".tab")[1].addEventListener("click", () => {
+  setTimeout(renderIdentifica, 50);
+});
+
+</script>
+<!-- ============================================
+     BLOCO 5 — EXPORTAÇÃO + UTILITÁRIOS + FINAL
+     ============================================ -->
+
+<script id="funcoesFinais">
+
+/* ==========================================================
+   1. EXPORTAÇÃO DAS RESPOSTAS EM .TXT
+   ========================================================== */
+
+function exportarTXT() {
+
+  let linhas = [];
+
+  for (let i = 0; i < window.FRASES.length; i++) {
+    const f = window.FRASES[i];
+    const prog = progresso[i];
+
+    if (!prog || !prog.respostaSelecionada) continue;
+
+    const emos = prog.emoções?.join(", ") || "(nenhuma)";
+
+    linhas.push(
+      `Frase: ${f.txt}\n` +
+      `Categoria: ${f.categoria}\n` +
+      `Emoções: ${emos}\n` +
+      `Resposta escolhida: ${prog.respostaSelecionada}\n` +
+      `----------------------------------------\n`
+    );
+  }
+
+  if (linhas.length === 0) {
+    alert("Ainda não respondeste a nenhuma frase.");
+    return;
+  }
+
+  const blob = new Blob([linhas.join("")], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "respostas_assertivas.txt";
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
+
+/* ==========================================================
+   2. GUARDAR PROGRESSO LOCAL (localStorage)
+   ========================================================== */
+
+function guardarProgresso() {
+  localStorage.setItem("fazedor_progresso", JSON.stringify(progresso));
+}
+
+function carregarProgresso() {
+  const dado = localStorage.getItem("fazedor_progresso");
+  if (dado) progresso = JSON.parse(dado);
+}
+
+setInterval(guardarProgresso, 2000); // guarda de 2 em 2 seg.
+
+
+/* ==========================================================
+   3. RESET GERAL DO PROJETO
+   ========================================================== */
+
+function resetTudo() {
+  if (!confirm("Tens a certeza? Isto apaga todo o teu progresso.")) return;
+
+  progresso = {};
+  localStorage.removeItem("fazedor_progresso");
+  indiceAtual = 0;
+  renderFrase();
+
+  alert("Progresso limpo!");
+}
+
+
+/* ==========================================================
+   4. UX – SCROLL PARA O TOPO QUANDO SE MUDA DE FRASE
+   ========================================================== */
+
+function scrollTopo() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.addEventListener("click", e => {
+  if (e.target.id === "btnNext" || e.target.id === "btnPrev") {
+    setTimeout(scrollTopo, 50);
+  }
+});
+
+
+/* ==========================================================
+   5. ADICIONAR BOTÕES EXTRA AO MODO APRENDE
+   ========================================================== */
+
+function inserirBotoesExtras() {
+
+  const container = document.getElementById("modo-aprende");
+
+  const zona = document.createElement("div");
+  zona.style.display = "flex";
+  zona.style.flexDirection = "column";
+  zona.style.gap = "10px";
+  zona.style.marginTop = "18px";
+
+  // Exportar
+  const b1 = document.createElement("button");
+  b1.textContent = "⬇️ Exportar respostas";
+  b1.style.padding = "12px";
+  b1.style.borderRadius = "10px";
+  b1.style.border = "none";
+  b1.style.background = "#6abf69";
+  b1.style.color = "white";
+  b1.onclick = exportarTXT;
+
+  // Reset
+  const b2 = document.createElement("button");
+  b2.textContent = "🧹 Limpar progresso";
+  b2.style.padding = "12px";
+  b2.style.borderRadius = "10px";
+  b2.style.border = "none";
+  b2.style.background = "#c74949";
+  b2.style.color = "white";
+  b2.onclick = resetTudo;
+
+  zona.appendChild(b1);
+  zona.appendChild(b2);
+
+  container.appendChild(zona);
+}
+
+
+/* ==========================================================
+   6. INICIALIZAÇÃO FINAL
+   ========================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  carregarProgresso();
+  inserirBotoesExtras();
+});
+
+</script>
