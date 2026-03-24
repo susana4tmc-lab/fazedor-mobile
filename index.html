@@ -6,6 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="description" content="Atividade interativa baseada em 'O Fazedor e a Ampulheta' para explorar emoções e praticar respostas assertivas a frases de pressão, com exercício de classificação e exportação de resultados."/>
   <title>O Fazedor e a Ampulheta — Explorar Emoções & Assertividade face à Pressão</title>
+/* --- CORREÇÃO MOBILE PARA MOSTRAR BOTÕES DO EXERCÍCIO --- */
+@media(max-width: 900px){
+    .toolbar2 {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+    }
+    #controlsClassificar .toolbar2 {
+        display: flex !important;
+    }
+}
+
+/* Impedir que o mobile esconda a parte do exercício */
+.grid.focus-frases > section:nth-child(2),
+.grid.focus-ex > section:first-child {
+    display: block !important;
+}
   <style>
     :root{--zoom:100%; --bg:#f8f3e7; --text:#1f2937; --muted:#4b5563; --card:#fffaf0; --line:#e5d8bd; --chip:#f3e9cf; --accent:#22c55e; --danger:#ef4444; --ok:#22c55e; --warn:#eab308; --title:#0f172a; --focus:#0ea5e9}
     *{box-sizing:border-box}
