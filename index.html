@@ -157,6 +157,72 @@ header h1 > span { flex: 0 1 auto !important; }
 header .container { display: block !important; }
 
 </style>
+  <style>
+/* === MOBILE FRIENDLY — Piloto 2026 === */
+
+/* Impede que o layout "rebente" no telemóvel */
+body, html {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Grelha e layout em 1 coluna quando o ecrã é estreito */
+@media (max-width: 900px) {
+
+    .grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .exerciseWrap {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Toolbars adaptáveis */
+    .toolbar,
+    .toolbar2 {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    /* Controles mais fáceis de tocar */
+    select,
+    button {
+        font-size: 14px !important;
+        padding: 10px !important;
+    }
+
+    /* Cards ajustados */
+    .card {
+        padding: 14px !important;
+    }
+
+    .item {
+        padding: 12px !important;
+    }
+
+    /* Caixas de arrastar mais pequenas no mobile */
+    .pool,
+    .drop {
+        min-height: auto !important;
+        padding: 10px !important;
+    }
+
+    .cardItem {
+        flex-wrap: wrap;
+        padding: 10px !important;
+    }
+
+    .cardItem button {
+        padding: 6px 10px !important;
+    }
+
+    /* Legenda compacta */
+    .legendBarFixed .legend-chip {
+        font-size: 12px !important;
+        padding: 4px 8px !important;
+    }
+}
+</style>
 </head>
 <body>
 <header role="banner">
@@ -504,6 +570,67 @@ header .container { display: block !important; }
   selectTab('assertivas');
 
 })();
+</script>
+  <!-- === BOTÕES FLUTUANTES — Piloto 2026 === -->
+<style>
+.float-buttons {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999;
+}
+
+.float-buttons button {
+    background: #1e40af;
+    color: #fff;
+    border: none;
+    padding: 12px 14px;
+    border-radius: 50px;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.25);
+}
+
+.float-buttons button:hover {
+    filter: brightness(1.1);
+}
+</style>
+
+<div class="float-buttons">
+    <button id="btnTopo">↑ Topo</button>
+    <button id="btnLegenda">💬 Legenda</button>
+    <button id="btnTabs">🔄 Separadores</button>
+</div>
+  <!-- === BLOCO 3 — SCRIPT DOS BOTÕES FLUTUANTES (Piloto 2026) === -->
+<script>
+// Botão "Topo"
+document.getElementById("btnTopo").onclick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+// Botão "Legenda" – salta para a barra fixa da legenda
+document.getElementById("btnLegenda").onclick = () => {
+    const alvo = document.querySelector('.legendBarFixed');
+    if (alvo) alvo.scrollIntoView({ behavior: 'smooth' });
+};
+
+// Botão "Separadores" – alterna entre os 2 separadores principais
+document.getElementById("btnTabs").onclick = () => {
+    const tabA = document.getElementById('tabAssertivas');
+    const tabB = document.getElementById('tabClassificar');
+
+    if (!tabA || !tabB) return;
+
+    const tabASelected = tabA.getAttribute("aria-selected") === "true";
+
+    // Se está no assertivas → muda para classificar
+    // Se está no classificar → muda para assertivas
+    const nextTab = tabASelected ? tabB : tabA;
+
+    nextTab.click(); // faz a alternância verdadeira
+};
 </script>
 </body>
 </html>
