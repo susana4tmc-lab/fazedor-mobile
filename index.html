@@ -223,15 +223,20 @@ body, html {
     }
 }
  /* Emojis na horizontal no mobile */
-    .emo-bar {
-        flex-direction: row !important;
-        overflow-x: auto;
-        padding-bottom: 6px;
-    }
+.emo-bar {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    gap: 6px !important;
+    padding-bottom: 6px !important;
+    width: 100% !important;
+}
 
-    .emo-bar button {
-        flex: 0 0 auto;
-    }   
+.emo-bar .emo,
+.emo-bar button {
+    flex: 0 0 auto !important;
+}  
 </style>
 </head>
 <body>
