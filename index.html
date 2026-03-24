@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<link rel="icon" type="image/png" href="favicon.png">
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="description" content="Atividade interativa baseada em 'O Fazedor e a Ampulheta' para explorar emoções e praticar respostas assertivas a frases de pressão, com exercício de classificação e exportação de resultados."/>
@@ -156,79 +155,6 @@ header h1 > .hourglass { margin-right: 4px !important; flex: 0 0 auto !important
 header h1 > span { flex: 0 1 auto !important; }
 /* Evitar que outras regras voltem a expandir o h1 */
 header .container { display: block !important; }
-
-</style>
-
-<style>
-@media(max-width:700px){
- header{padding:2px!important;}
- header .container{padding:2px 4px!important;}
- header h1{font-size:15px!important;gap:2px!important;}
- .hourglass{width:20px!important;height:20px!important;}
- .steps{display:none!important;}
- /* Legend hidden */
- .legendBarFixed{display:none!important;}
- /* Card compact */
- .card{padding:6px!important;}
- main.container{padding:6px!important;}
- .sectionTitle{font-size:15px!important;margin:4px 0!important;}
- .emo{font-size:18px!important;padding:3px!important;}
- /* No drag */
- .drag, .pool{display:none!important;}
- .cardItem button{padding:10px!important;font-size:16px!important;}
- /* Fullscreen toggle */
- #fullscreenBtn{position:fixed;bottom:10px;right:10px;z-index:999;background:#1e40af;color:white;padding:10px 14px;border-radius:10px;font-size:14px;}
- /* Show Legend button */
- #showLegend{position:fixed;bottom:60px;right:10px;z-index:999;background:#22c55e;color:white;padding:10px 14px;border-radius:10px;font-size:14px;}
- #mobileLegend{display:none;position:fixed;bottom:0;left:0;width:100%;background:white;padding:10px;border-top:2px solid #ccc;z-index:9999;max-height:40vh;overflow:auto;}
-}
-</style>
-<script>
-document.addEventListener('DOMContentLoaded',()=>{
- const b=document.createElement('button');b.id='fullscreenBtn';b.innerText='⛶';document.body.appendChild(b);
- b.onclick=()=>{if(!document.fullscreenElement){document.documentElement.requestFullscreen();}else{document.exitFullscreen();}}
- const l=document.createElement('button');l.id='showLegend';l.innerText='😊 Emoções';document.body.appendChild(l);
- const legend=document.createElement('div');legend.id='mobileLegend';legend.innerHTML=document.getElementById('legend')?document.getElementById('legend').outerHTML:'Sem legenda';document.body.appendChild(legend);
- l.onclick=()=>{legend.style.display=legend.style.display==='block'?'none':'block'}
-});
-</script>
-
-<style>
-
-@media(max-width:700px){
-  /* Esconde a barra original de tabs para poupar espaço */
-  .legendBarFixed{display:none!important;}
-  /* Botão recolhível compacto */
-  #tabToggle{position:sticky;top:0;z-index:1000;background:#1e40af;color:#fff;border:none;width:100%;padding:10px 12px;font-size:16px;}
-  /* Caixa com os dois separadores */
-  #mobileTabs{display:none;background:#fff;border-bottom:2px solid #e5e7eb;}
-  #mobileTabs button{display:block;width:100%;padding:12px 14px;border:none;background:#f3f4f6;font-size:15px;text-align:left}
-  #mobileTabs button+button{border-top:1px solid #e5e7eb}
-  /* Layout de uma coluna */
-  .grid{grid-template-columns:1fr!important}
-  /* Pool visível (mesmo sem drag no mobile) */
-  .pool{display:block!important}
-  .drag{display:none!important}
-}
-
-</style>
-<style>
-@media(max-width:1200px){
-  .emo-bar{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;gap:6px!important;}
-  .emo-bar button{flex:0 0 auto!important;}
-}
-</style>
-<style>
-
-@media (max-width:700px){
-  .legend-fab{position:fixed;right:10px;z-index:1000;border:none;color:#fff;border-radius:12px;padding:10px 14px;font-size:14px;box-shadow:0 6px 18px rgba(0,0,0,.18)}
-  #fabEmos{bottom:60px;background:#16a34a;}
-  #fabTipos{bottom:60px;background:#1e40af;}
-  .legend-sheet{display:none;position:fixed;left:0;right:0;bottom:0;max-height:45vh;overflow:auto;background:#fff;border-top:2px solid #e5e7eb;z-index:1001;padding:10px 12px}
-  .legend-sheet h4{margin:0 0 8px;font-size:15px;color:#374151}
-  .legend-row{display:flex;gap:8px;align-items:center;margin:6px 0}
-  .legend-icon{width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid #e5e7eb;background:#f9fafb}
-}
 
 </style>
 </head>
@@ -579,46 +505,5 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 })();
 </script>
-
-<script>
-// Tabs recolhíveis (Opção 1: alternar secções como no desktop)
-document.addEventListener('DOMContentLoaded',()=>{
-  if(!window.matchMedia('(max-width:700px)').matches) return;
-  const btn=document.createElement('button');
-  btn.id='tabToggle'; btn.textContent='📌 Atividades';
-  const box=document.createElement('div'); box.id='mobileTabs';
-  box.innerHTML = '<button data-tab="assertivas">🧩 Aprende frases assertivas</button>\n'+
-                  '<button data-tab="classificar">🧠 Identifica as frases de pressão</button>';
-  document.querySelector('header .container').appendChild(box); document.querySelector('header .container').appendChild(btn);
-
-  btn.onclick=()=>{ box.style.display = (box.style.display==='block'?'none':'block'); };
-
-  function callSelect(mode){
-    // Usa a função original selectTab se existir para manter toda a lógica
-    if(typeof window.selectTab === 'function'){
-      window.selectTab(mode);
-    } else {
-      // Fallback: alterna classes caso selectTab não esteja global
-      const isA = (mode==='assertivas');
-      document.body.classList.toggle('mode-assertivas', isA);
-      document.body.classList.toggle('mode-classificar', !isA);
-    }
-    box.style.display='none';
-    // garantir que a secção certa fica visível no topo
-    setTimeout(()=>{
-      const id = (mode==='assertivas') ? 'sec-frases' : 'sec-exercicio';
-      document.getElementById(id)?.scrollIntoView({behavior:'smooth', block:'start'});
-    }, 50);
-  }
-
-  box.querySelector('[data-tab="assertivas"]').onclick = ()=>callSelect('assertivas');
-  box.querySelector('[data-tab="classificar"]').onclick = ()=>callSelect('classificar');
-
-  // Estado inicial: mostrar "assertivas" (como no desktop)
-  callSelect('assertivas');
-});
-</script>
-
-<script>(function(){function e(){if(!window.matchMedia('(max-width:700px)').matches)return;if(document.getElementById('fabEmos'))return;const e=document.createElement('button');e.id='fabEmos',e.className='legend-fab',e.textContent='😊 Emoções';const t=document.createElement('div');t.id='sheetEmos',t.className='legend-sheet';const n=document.getElementById('legend');t.innerHTML='<h4>Legenda de Emoções</h4>'+(n?n.outerHTML:'<div>Sem legenda</div>');const o=document.createElement('button');o.id='fabTipos',o.className='legend-fab',o.textContent='📘 Legenda';const d=document.createElement('div');d.id='sheetTipos',d.className='legend-sheet',d.innerHTML='<h4>Legenda da Atividade</h4>'+'<div class="legend-row"><span class="legend-icon">✅</span> Frases respeitadoras</div>'+'<div class="legend-row"><span class="legend-icon">⚠️</span> Frases duvidosas</div>'+'<div class="legend-row"><span class="legend-icon">🚩</span> Frases de pressão</div>',document.body.appendChild(e),document.body.appendChild(t),document.body.appendChild(o),document.body.appendChild(d),e.onclick=()=>{t.style.display='block'===t.style.display?'none':'block',d.style.display='none'},o.onclick=()=>{d.style.display='block'===d.style.display?'none':'block',t.style.display='none'};function a(){const n=document.body.classList.contains('mode-assertivas');e.style.display=n?'inline-block':'none',t.style.display=n?t.style.display:'none',o.style.display=n?'none':'inline-block',d.style.display=n?'none':d.style.display}const s=window.selectTab;window.selectTab=function(e){if('function'==typeof s)s(e);else{const t='assertivas'===e;document.body.classList.toggle('mode-assertivas',t),document.body.classList.toggle('mode-classificar',!t)}a()},a(),document.addEventListener('click',(n=>{const s=n.target;s&&(t.contains(s)||s===e||(t.style.display='none'),d.contains(s)||s===o||(d.style.display='none'))}),!0)}'loading'===document.readyState?document.addEventListener('DOMContentLoaded',e):e();})();</script>
 </body>
 </html>
