@@ -8,21 +8,6 @@
   <title>O Fazedor e a Ampulheta — Explorar Emoções & Assertividade face à Pressão</title>
 /* --- CORREÇÃO MOBILE PARA MOSTRAR BOTÕES DO EXERCÍCIO --- */
 @media(max-width: 900px){
-    .toolbar2 {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        gap: 8px !important;
-    }
-    #controlsClassificar .toolbar2 {
-        display: flex !important;
-    }
-}
-
-/* Impedir que o mobile esconda a parte do exercício */
-.grid.focus-frases > section:nth-child(2),
-.grid.focus-ex > section:first-child {
-    display: block !important;
-}
   <style>
     :root{--zoom:100%; --bg:#f8f3e7; --text:#1f2937; --muted:#4b5563; --card:#fffaf0; --line:#e5d8bd; --chip:#f3e9cf; --accent:#22c55e; --danger:#ef4444; --ok:#22c55e; --warn:#eab308; --title:#0f172a; --focus:#0ea5e9}
     *{box-sizing:border-box}
@@ -247,7 +232,27 @@ document.addEventListener('DOMContentLoaded',()=>{
   .legend-icon{width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid #e5e7eb;background:#f9fafb}
 }
 
+
+style>
+/* --- CORREÇÃO MOBILE PARA MOSTRAR BOTÕES NO MOBILE --- */
+@media(max-width: 900px){
+  .toolbar2 {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+  #controlsClassificar .toolbar2 {
+    display: flex !important;
+  }
+}
+
+/* NÃO esconder secções no mobile */
+.grid.focus-frases > section:nth-child(2),
+.grid.focus-ex > section:first-child {
+  display: block !important;
+}
 </style>
+
 </head>
 <body>
 <header role="banner">
