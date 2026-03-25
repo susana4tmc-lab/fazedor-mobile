@@ -336,7 +336,7 @@ header h1 {
   if(!MAP || Object.keys(MAP).length===0){ alert('Não foi possível carregar as frases. Fecha e volta a abrir este ficheiro.'); return; }
 
   // Legenda de Emoções
-  const EMOS = [["\u{1F642}","Tranquilo/a","free"], ["\u{1F61F}","Triste","free"], ["\u{1F621}","Zangado/a","free"], ["\u{1F628}","Com medo","free"], ["\u{1F615}","Confuso/a","free"], ["\u{1F633}","Envergonhado/a","free"], ["\u{1F62C}","Ansioso/a","free"], ["\u{1F60C}","Aliviado/a","gated"]];
+  const EMOS = [["\u{1F61F}","Triste","free"], ["\u{1F621}","Zangado/a","free"], ["\u{1F628}","Com medo","free"], ["\u{1F615}","Confuso/a","free"], ["\u{1F633}","Envergonhado/a","free"], ["\u{1F62C}","Ansioso/a","free"], ["\u{1F60C}","Aliviado/a","gated"]];
   const legendEl=document.getElementById('legend'); EMOS.forEach(([icon,label])=>{ const d=document.createElement('div'); d.className='legend-chip'; d.innerHTML='<span role="img" aria-label="'+label+'" style="font-size:18px">'+icon+'</span> '+label; legendEl.appendChild(d); });
 
   // Categorias (heurística simples)
