@@ -449,8 +449,8 @@ header h1 {
   const dEng=document.getElementById('drop_enganos')?.querySelector('.holder');
   const dPre=document.getElementById('drop_pressao')?.querySelector('.holder');
   const scoreEl=document.getElementById('score');
-  const PEDIDOS_RESPEITADORES=['Queres provar um bocadinho?','Se não quiseres, não faz mal.','Podes escolher.','Está tudo bem se disseres que não.','Queres ir brincar ou preferes ficar aqui?','Diz se não te apetecer.','Só se quiseres.','Não faz mal nenhum se não quiseres.','Faz como tu achares melhor','a nossa relação não depende da tua resposta','Podes pensar no teu tempo, sem pressa','Se precisares de ajuda estou por aqui', 'Não tens de justificar nada, eu respeito', 'Não quero que faças nada que te faça sentir mal','A tua opiniãoé importante para mim','Queres jogar comigo?'];
-  const ENGANADORAS=['Estou só a tentar ajudar…','É para teu bem.','Eu só quero ser simpático.','Não percebo porque não queres.'];
+  const PEDIDOS_RESPEITADORES=['Queres provar um bocadinho?','Se não quiseres, não faz mal.','Podes escolher.','Está tudo bem se disseres que não.','Queres ir brincar ou preferes ficar aqui?','Diz se não te apetecer.','Só se quiseres.','Não faz mal nenhum se não quiseres.','Faz como tu achares melhor para ti','A nossa relação não depende da tua resposta','Podes pensar no teu tempo, sem pressa','Se precisares de ajuda estou por aqui', 'Não tens de justificar nada, eu respeito', 'Não quero que faças nada que te faça sentir mal','A tua opinião é importante para mim','Queres jogar comigo?'];
+  const ENGANADORAS=['Estou só a tentar ajudar…','É para teu bem.','Eu só quero ser simpático.','Nunca te peço nada, mas pronto.','Ficas mesmo confortàvel com essa decisão?','É pena,pensei que podias ser mais flexível.','Não percebo porque não queres.'];
   const ALL_PRESS = Object.keys(MAP);
   const shuffle=a=>{ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; };
   let pool=[], drops={respeito:[], engano:[], pressao:[]};
