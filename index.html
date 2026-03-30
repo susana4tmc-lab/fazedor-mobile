@@ -559,8 +559,6 @@ header h1 {
   // === Tabs ===
   const tabA=document.getElementById('tabAssertivas');
   const tabB=document.getElementById('tabClassificar');
-  const paneA=document.getElementById('paneAssertivas');
-  const paneB=document.getElementById('paneClassificar');
   const filtersA=document.getElementById('filtersAssertivas');
   const controlsB=document.getElementById('controlsClassificar');
   // Mover Categoria (label + select) para o separador "Aprende frases assertivas"
@@ -580,6 +578,10 @@ header h1 {
     }
   })();
   function selectTab(mode, doScroll = true){
+    
+  const paneA=document.getElementById('paneAssertivas');
+  const paneB=document.getElementById('paneClassificar');
+    
     const isA = mode==='assertivas';
     tabA?.setAttribute('aria-selected', isA?'true':'false');
     tabB?.setAttribute('aria-selected', isA?'false':'true');
