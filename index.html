@@ -606,23 +606,23 @@ header h1 {
   <!-- === BOTÕES FLUTUANTES — Piloto 2026 === -->
 <style>
 .float-buttons {
-    position: fixed;
-    bottom: 16px;
-    right: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 9999;
+  position: fixed;
+  bottom: 10px;      /* Fica junto ao fundo */
+  left: 0;
+  width: 100%;       /* Para centrar automaticamente */
+  display: flex;
+  justify-content: center;
+  z-index: 9999;
 }
 
 .float-buttons button {
-    background: #1e40af;
-    color: #fff;
-    border: none;
-    padding: 12px 14px;
-    border-radius: 50px;
-    font-size: 16px;
-    box-shadow: 0 4px 10px rgba(0,0,0,.25);
+  background: #1e40af;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,.25);
 }
 
 .float-buttons button:hover {
