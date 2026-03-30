@@ -579,7 +579,7 @@ header h1 {
       controlsB.appendChild(tb2);
     }
   })();
-  function selectTab(mode){
+  function selectTab(mode, doScroll = true){
     const isA = mode==='assertivas';
     tabA?.setAttribute('aria-selected', isA?'true':'false');
     tabB?.setAttribute('aria-selected', isA?'false':'true');
@@ -587,9 +587,15 @@ header h1 {
     document.body.classList.toggle('mode-assertivas', isA);
     document.body.classList.toggle('mode-classificar', !isA);
     const g=document.querySelector('.grid'); g?.classList.remove('focus-ex','focus-frases');
-    if(isA){ document.getElementById('sec-frases')?.scrollIntoView({behavior:'smooth'}); }
-    else { document.getElementById('sec-exercicio')?.scrollIntoView({behavior:'smooth'}); }
-  }
+    
+if(doScroll){
+    if(isA){
+        document.getElementById('sec-frases')?.scrollIntoView({behavior:'smooth'});
+    } else {
+        document.getElementById('sec-exercicio')?.scrollIntoView({behavior:'smooth'});
+    }
+}
+
   tabA?.addEventListener('click', ()=>selectTab('assertivas'));
   tabB?.addEventListener('click', ()=>selectTab('classificar'));
   // Remover event listeners antigos dos botões foco, se restarem
@@ -599,7 +605,7 @@ header h1 {
     btnFoco?.replaceWith(document.createComment('botão foco removido')); btnFocoFrases?.replaceWith(document.createComment('botão foco removido'));
   }catch(e){}
   // Estado inicial
-  selectTab('assertivas');
+  selectTab('assertivas', false);
 
 })();
 </script>
