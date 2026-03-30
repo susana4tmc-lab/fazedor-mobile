@@ -587,9 +587,7 @@ header h1 {
     document.body.classList.toggle('mode-assertivas', isA);
     document.body.classList.toggle('mode-classificar', !isA);
     const g=document.querySelector('.grid'); g?.classList.remove('focus-ex','focus-frases');
-    if(isA){ document.getElementById('sec-frases')?.scrollIntoView({behavior:'smooth'}); }
-    else { document.getElementById('sec-exercicio')?.scrollIntoView({behavior:'smooth'}); }
-  }
+  // Removido scroll automático ao mudar tab
   tabA?.addEventListener('click', ()=>selectTab('assertivas'));
   tabB?.addEventListener('click', ()=>selectTab('classificar'));
   // Remover event listeners antigos dos botões foco, se restarem
