@@ -597,7 +597,10 @@ tabA?.addEventListener('click', () => selectTab('assertivas'));
 tabB?.addEventListener('click', () => selectTab('classificar'));
     
   // Estado inicial
-  selectTab('assertivas');
+  window.addEventListener('DOMContentLoaded', () => {
+    selectTab('assertivas');
+});
+
 
 })();
 </script>
