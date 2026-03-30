@@ -583,7 +583,8 @@ header h1 {
     const isA = mode==='assertivas';
     tabA?.setAttribute('aria-selected', isA?'true':'false');
     tabB?.setAttribute('aria-selected', isA?'false':'true');
-    if(paneA) paneA.hidden = !isA; if(paneB) paneB.hidden = isA;
+    if(paneA) paneA.hidden = !isA; 
+    if(paneB) paneB.hidden = isA;
     document.body.classList.toggle('mode-assertivas', isA);
     document.body.classList.toggle('mode-classificar', !isA);
     const g=document.querySelector('.grid'); g?.classList.remove('focus-ex','focus-frases');
